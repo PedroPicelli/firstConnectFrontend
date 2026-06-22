@@ -1,0 +1,279 @@
+
+.auth-page-section {
+    display: flex;
+    flex-direction: column;
+
+    height: 100dvh;
+
+}
+
+.auth-page-section .auth-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 24px;
+    padding: 24px;
+    
+    flex-shrink: 0;
+
+}
+
+.auth-page-section .auth-header img {
+    margin: 0;
+
+    width: clamp(70px, 18vw, 110px);
+    height: auto;
+
+    cursor: pointer;
+
+}
+
+.auth-header img {
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.auth-header img:hover {
+    transform: scale(1.03);
+    opacity: .9;
+}
+
+.auth-header img:active {
+    transform: scale(.97);
+}
+
+.auth-page-section .auth-header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+
+}
+
+.auth-forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    padding: 12px;
+}
+
+
+.form-default-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+
+
+.input-hint {
+    opacity: 0;
+    max-height: 0;
+    transition: opacity .3s ease-in-out,
+        max-height .3s ease-in-out;
+}
+
+.form-default-input label {
+
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--text-secondary);
+    font-weight: 500;
+
+}
+
+.form-default-input input {
+    
+    min-height: 48px;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    outline: none;
+    padding-left: 12px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+
+    background: var(--background-input);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid var(--border-default);
+
+    box-shadow: 0 0 12px rgba(37,99,235,0.08);
+
+    border: 1px solid transparent;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+}
+
+.form-default-input input:focus {
+
+    border-color: var(--primary-blue-light);
+
+}
+
+.form-default-input:focus-within .input-hint {
+
+    max-height: 20px;
+    opacity: 1;
+    font-size: clamp(0.8rem, 4vw, 1rem);
+
+}
+
+.auth-forms button {
+    margin-top: 48px;
+}
+
+
+
+
+.invalid-input-shake {
+  animation: shake 0.18s ease-in-out;
+}
+
+.input-wrapper {
+    
+    position: relative;
+
+}
+
+.input-wrapper::after, .input-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 14px;
+    height: 14px;
+
+    transition:
+        background .2s ease,
+        border .2s ease;
+
+}
+
+.input-wrapper.input-validating::after {
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    border-top: 2px solid var(--primary-blue);
+
+    animation: spin .7s linear infinite;
+}
+
+
+.input-wrapper.input-validated-available::after {
+
+
+    right: 14px;
+    top: 50%;
+
+    width: 12px;
+    height: 6px;
+
+    border-left: 2px solid var(--success);
+    border-bottom: 2px solid var(--success);
+
+    transform-origin: center;
+    
+    transform:
+        translateY(-50%)
+        rotate(-45deg);
+
+}
+
+
+
+
+.input-wrapper.input-validated-not-available::before,
+.input-wrapper.input-validated-not-available::after {
+
+    width: 16px;
+    height: 2px;
+    background-color: var(--danger);
+
+    transform-origin: center;
+
+    z-index: 1;
+
+}
+
+.input-wrapper.input-validated-not-available::before {
+
+
+    transform:
+        translateY(-70%)
+        rotate(45deg);
+
+}
+
+
+.input-wrapper.input-validated-not-available::after {
+
+
+    transform:
+        translateY(-70%)
+        rotate(-45deg);
+
+}
+
+
+
+
+
+@keyframes spin {
+
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 650px) {
+    
+    .auth-forms {
+        width: 500px;
+    }
+
+}
+
+
+
+@media screen and (orientation: landscape) and (max-height: 900px) {
+    .auth-forms {
+        width: 100%;
+    }
+
+
+}

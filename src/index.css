@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+:root {
+
+  
+
+  --background-main: #050816;
+  --background-secondary: #0A1022;
+  --background-card: #10182B;
+  --background-input: #172033;
+
+  
+
+  --primary-blue: #2563EB;
+  --primary-blue-light: #3B82F6;
+  --primary-blue-dark: #1D4ED8;
+
+
+
+  --primary-yellow: #FACC15;
+  --primary-yellow-light: #FDE047;
+  --primary-yellow-dark: #EAB308;
+
+  
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #B8C1D9;
+  --text-muted: #7B849C;
+
+  
+
+  --border-default: #26324D;
+  --border-light: #334155;
+
+  
+
+  --success: #22C55E;
+  --warning: #FACC15;
+  --danger: #EF4444;
+
+  
+
+  --feed-like: #FF4D6D;
+  --feed-comment: #D1D5DB;
+  --feed-share: #60A5FA;
+
+  
+
+  --shadow-blue: rgba(37, 99, 235, 0.35);
+  --shadow-card: rgba(0, 0, 0, 0.35);
+
+  
+
+  --gradient-primary: linear-gradient(135deg, #2563EB, #FACC15);
+  --gradient-dark: linear-gradient(180deg, #0A1022, #050816);
+
+  
+
+  --tag-blue: #1E3A8A;
+  --tag-gray: #2B3548;
+  --tag-text: #E2E8F0;
+
+  
+
+  --online: #22C55E;
+  --offline: #6B7280;
+
+  
+
+  --glass-effect: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+
+
+  --mobile-bottom-bar: #0D1425;
+  --desktop-sidebar: #0B1220;
+
+  
+
+  --button-primary: #2563EB;
+  --button-primary-hover: #3B82F6;
+
+  --button-secondary: transparent;
+  --button-secondary-border: #FACC15;
+
+  
+
+  --scrollbar: #24324A;
+  --scrollbar-thumb: #2563EB;
+
+  
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+
+
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "outfit", sans-serif;
+  color: var(--text-primary)
+
+}
+
+
+.root {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+body {
+
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--background-main);
+
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: -20%;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37,99,235,0.2),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(250,204,21,0.16),
+            transparent 30%
+        );
+
+    pointer-events: none;
+    z-index: -1;
+
+    animation:
+        ambientMove 24s ease-in-out infinite alternate;
+}
+
+
+
+@keyframes ambientMove {
+
+    0% {
+        transform:
+            translate(-5%, -5%)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translate(5%, 5%)
+            rotate(12deg);
+    }
+
+}
+

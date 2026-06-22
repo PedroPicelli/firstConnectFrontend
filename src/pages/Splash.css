@@ -1,0 +1,97 @@
+
+.splash-page-section {
+    display: flex;
+    flex-direction: column;
+    width: 100dvw;
+    min-height: 100dvh;
+    padding: 32px 20px;
+}
+
+.splash-page-icon-showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0.5;
+}
+
+.splash-page-icon-showcase img {
+    margin: auto auto 24px auto;
+    width: min(60%, 320px);
+    height: auto;
+}
+
+.splash-page-slogan {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 12px;
+    flex: 1;
+}
+
+.splash-page-slogan p {
+    text-align: center;
+    font-size: clamp(1.1rem, 4vw, 1.35rem);
+}
+
+.splash-page-choice-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    gap: 36px;
+}
+
+.splash-page-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+
+}
+
+.splash-page-choice-box p {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+
+@media screen and (min-width: 650px) {
+    
+    
+    .splash-page-buttons {
+        flex-direction: row;
+        gap: 12px;
+        width: 100%;
+        max-width: 1000px;
+
+    }
+
+    .splash-page-icon-showcase {
+        flex: 0.6;
+    }
+
+    .splash-page-icon-showcase img {
+        width: min(60%, 400px);
+    }
+
+    .splash-page-slogan {
+        padding-top: 24px;
+    }
+
+    .splash-page-slogan p {
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
+    }
+    
+    .splash-page-choice-box p {
+        font-size: 1.2rem;
+    }
+
+}
+
