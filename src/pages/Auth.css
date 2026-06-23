@@ -222,11 +222,22 @@
 
 .input-wrapper.input-validated-not-available::after {
 
-
     transform:
         translateY(-70%)
         rotate(-45deg);
 
+}
+
+.input-wrapper.input-wrapper-error input {
+
+    border-color: var(--danger);
+
+}
+
+.input-wrapper.input-wrapper-error ~ p {
+    color: var(--danger);
+    max-height: 20px;
+    opacity: 1;
 }
 
 

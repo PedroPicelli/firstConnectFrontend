@@ -15,6 +15,7 @@ export function useDynamicValidation(availabilityFunction) {
     const [validatingClass, setValidatingClass] = useState("")
     const validationIdRef = useRef(0)
     const controllerRef = useRef(null);
+    const [availability, setAvailability] = useState(false)
 
 
     useEffect(() => {
@@ -41,6 +42,7 @@ export function useDynamicValidation(availabilityFunction) {
             const currentValidationId = ++validationIdRef.current
             controllerRef.current = new AbortController();
             const signal = controllerRef.current.signal;
+            setAvailability(false)
 
             const available = await availabilityFunction(userNormalized, signal)
 
@@ -49,6 +51,7 @@ export function useDynamicValidation(availabilityFunction) {
 
             if(available) {
                 setValidatingClass(validatingClasses.AVAILABLE)
+                setAvailability(true)
             } else {
                 setValidatingClass(validatingClasses.NOT_AVAILABLE)
             }
@@ -61,7 +64,8 @@ export function useDynamicValidation(availabilityFunction) {
     return [
         triggerDynamicValidation,
         validatingClass,
-        setValidatingClass
+        setValidatingClass,
+        availability
     ]
 
 }

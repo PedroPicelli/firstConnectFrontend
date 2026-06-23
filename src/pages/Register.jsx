@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useShakeAnimation } from "../hooks/input/useShakeAnimation";
 import { emailAvailabilityRequest, usernameAvailabilityRequest } from "../context/availabilityRequests";
-import { useDynamicValidation, useEmailAddressValidation } from "../hooks/input/useDinamicValidation";
+import { useDynamicValidation, useEmailAddressValidation } from "../hooks/input/useDynamicValidation";
 import { normalizeEmail } from "../utils/normalize/normalizeEmail";
 import { isValidEmail } from "../utils/validation/emailValidation";
+import { registerRequest } from "../context/registerRequest";
+import { validateInput } from "../utils/validation/generalValidation";
 
 
 const validatingClasses = {
@@ -27,26 +29,43 @@ function Register() {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
+    const [validEmail, setValidEmail] = useState(false)
+    const { triggerShake: emailTriggerShake, shakeClassName: emailShakeClassName } = useShakeAnimation()
 
-    const [triggerEmailValidation, validateEmailClass, setValidateEmailClass] = useDynamicValidation(emailAvailabilityRequest)
+    const [triggerEmailValidation, validateEmailClass, setValidateEmailClass, emailAvailability] = useDynamicValidation(emailAvailabilityRequest)
     const triggerEmailAddressValidation = useEmailAddressValidation
 
 
+    const [displayName, setDisplayName] = useState("")
+    const [validateDisplayNameClass, setValidateDisplayNameClass] = useState("")
+    const [validDisplayName, setValidDisplayName] = useState(false)
+
+    const { triggerShake: displayNameTriggerShake, shakeClassName: displayNameShakeClassName } = useShakeAnimation()
+
+    
 
     const [username, setUsername] = useState("")
-    const { triggerShake, shakeClassName } = useShakeAnimation()
+    const { triggerShake: usernameTriggerShake, shakeClassName: usernameShakeClassName } = useShakeAnimation()
+    const [validUsername, setValidUsername] = useState(false)
 
-    const [triggerUsernameValidation, validateUsernameClass] = useDynamicValidation(usernameAvailabilityRequest)
+    const [triggerUsernameValidation, validateUsernameClass, , usernameAvailability] = useDynamicValidation(usernameAvailabilityRequest)
 
 
+    const [password, setPassword] = useState("")
+    const [validatePasswordClass, setValidatePasswordClass] = useState("")
+    const [validPassword, setValidPassword] = useState(false)
+    
+    const { triggerShake: passwordTriggerShake, shakeClassName: passwordShakeClassName } = useShakeAnimation()
+
+    const [emailError, setEmailError] = useState("")
+    const [usernameError, setUsernameError] = useState("")
+    const [displayNameError, setDisplayNameError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
 
 
-    async function handleEmail(e) {
-        const emailValue = e.target.value;
+    
 
-        const emailNormalized = normalizeEmail(emailValue)
-
-        setEmail(emailNormalized)
+    function verifyEmail(emailNormalized) {
 
         const availability = triggerEmailAddressValidation(emailNormalized)
 
@@ -54,15 +73,42 @@ function Register() {
         if(availability !== true) {
             setValidateEmailClass("")
             triggerEmailValidation("")
+            setValidEmail(false)
             return
+        } else {
+            setValidEmail(true)
         }
 
 
         triggerEmailValidation(emailNormalized)
-        
+    }
+
+    async function handleEmail(e) {
+        const emailValue = e.target.value;
+
+        const emailNormalized = normalizeEmail(emailValue)
+
+        setEmail(emailNormalized)
+        setEmailError("")
+
+        verifyEmail(emailNormalized)        
     }
 
     
+    function verifyUsername(userValue) {
+        if(hasInvalidUsernameChars(userValue)) {
+            usernameTriggerShake()
+        }
+
+        if(userValue.length >= 3) {
+            setValidUsername(true)
+        } else {
+            setValidUsername(false)
+        }
+
+        triggerUsernameValidation(userNormalized)
+    }
+
     function handleUsername(e) {
 
         const userValue = e.target.value;
@@ -70,14 +116,117 @@ function Register() {
         const userNormalized = normalizeUsername(userValue)
 
         setUsername(userNormalized);
+        setUsernameError("")
         
-        if(hasInvalidUsernameChars(userValue)) {
-            triggerShake()
-        }
-
-        triggerUsernameValidation(userNormalized)
+        verifyUsername(userValue)
     }
 
+
+    function handleDisplayName(e) {
+        
+        const displayNameValue = e.target.value;
+        
+        setDisplayName(displayNameValue)
+        setDisplayNameError("")
+
+        if(displayNameValue.length == 0) {
+            setValidateDisplayNameClass("")
+            return
+        }
+        
+        if(displayNameValue.length >= 3) {
+            setValidDisplayName(true)
+        } else {
+            setValidDisplayName(false)
+        }
+
+        setValidateDisplayNameClass(validateInput(displayNameValue.length >= 3))
+    }
+
+    
+    function handlePassword(e) {
+        const passwordValue = e.target.value
+
+        setPassword(passwordValue)
+        setPasswordError("")
+    
+        if(passwordValue.length == 0) {
+            setValidatePasswordClass("")
+            return
+        }
+
+        if(passwordValue.length >= 8) {
+            setValidPassword(true)
+        } else {
+            setValidPassword(false)
+        }
+
+        setValidatePasswordClass(validateInput(passwordValue.length >= 8))
+
+    }
+
+
+    async function handleRegister(e) {
+
+        e.preventDefault();
+
+        setEmailError("")
+        setDisplayNameError("")
+        setUsernameError("")
+        setPasswordError("")
+
+
+        if(!validEmail) {
+            setEmailError("Please insert a valid email")
+        } else if(!emailAvailability) {
+            setEmailError("This email is already taken")
+        }
+
+        if(!validEmail || !emailAvailability) {
+            emailTriggerShake()
+            return
+        }
+
+        if(!validDisplayName) {
+            displayNameTriggerShake()
+            setDisplayNameError("Display Name must have at least 3 characters")
+            return
+        }
+
+
+        if(!validUsername) {
+            setUsernameError("Username must have at least 5 characters")
+        } else if(!usernameAvailability) {
+            setUsernameError("This username is already taken")
+        }
+
+        if(!validUsername || !usernameAvailability) {
+            usernameTriggerShake()
+            return
+        }
+
+        if(!validPassword) {
+            passwordTriggerShake()
+            setPasswordError("Password must have at least 8 characters")
+            return
+        }
+
+        try {
+            const request = await registerRequest(email, displayName, username, password)
+
+        } catch(error) {
+            switch(error) {
+                case "Conflict":
+                    verifyEmail()
+                    verifyUsername()
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+    }
 
 
 
@@ -98,49 +247,69 @@ function Register() {
 
                     </div>
 
-                    <form action="" className="auth-forms">
+                    <form onSubmit={ handleRegister } className="auth-forms">
                         <div className="form-default-input">
                             <label htmlFor="email">Email:</label>
                             <div className={ [
                                 "input-wrapper",
-                                validateEmailClass
+                                validateEmailClass,
+                                emailError.length > 0 && "input-wrapper-error"
                             ].join(" ") }>
-                                <input type="text" autoComplete="email" inputMode="email" id="email" value={ email } onChange={ handleEmail }/>
+                                <input className={ emailShakeClassName } type="text" autoComplete="email" inputMode="email" id="email" value={ email } onChange={ handleEmail }/>
                             </div>
-                            <div className="spacer" />
+                            <p className="input-hint">{ emailError }</p>
                         </div>
 
                         <div className="form-default-input">
                             <label htmlFor="display-name">Display name:</label>
-                            <div className="input-wrapper">
-                                <input type="text" id="display-name" />
+                            <div className={ [
+                                "input-wrapper",
+                                validateDisplayNameClass,
+                                displayNameError.length > 0 && "input-wrapper-error"
+                                ].join(" ") }>
+                                <input className={ displayNameShakeClassName } type="text" id="display-name" value={ displayName } onInput={ handleDisplayName }/>
                             </div>
-                            <p className="input-hint">This is how you will be seen. Be creative.</p>
+                            <p className="input-hint">{
+                                displayNameError.length == 0
+                                    ? "This is how you will be seen. At least 3 characters."
+                                    : displayNameError
+                            }</p>
 
                         </div>
 
                         
-
                         <div className="form-default-input">
                             <label htmlFor="username">Username:</label>
                             <div className={ [
                                 "input-wrapper",
-                                validateUsernameClass
+                                validateUsernameClass,
+                                usernameError.length > 0 && "input-wrapper-error"
                             ].join(" ") }>
-                                <input className={ shakeClassName } type="text" value={ username } id="username" onInput={ handleUsername } />
+                                <input className={ usernameShakeClassName } type="text" value={ username } id="username" onInput={ handleUsername } />
                             </div>
-                            <p className="input-hint">Only letters, numbers, _ and .</p>
+                            <p className="input-hint">{
+                                usernameError.length == 0
+                                    ? "Only letters, numbers, _ and ."
+                                    : usernameError
+                            
+                            }</p>
                         </div>
-
-
 
 
                         <div className="form-default-input">
                             <label htmlFor="password">Password:</label>
-                            <div className="input-wrapper">
-                                <input type="password" id="password" />
+                            <div className={ [
+                                "input-wrapper",
+                                validatePasswordClass,
+                                passwordError.length > 0 && "input-wrapper-error"
+                                ].join(" ") }>
+                                <input className={ passwordShakeClassName } type="password" id="password" value={ password } onInput={ handlePassword } />
                             </div>
-                            <div className="spacer" />
+                            <p className="input-hint">{
+                                passwordError.length == 0
+                                    ? "At least 8 characters"
+                                    : passwordError
+                            }</p>
                         </div>
 
 
