@@ -3,6 +3,9 @@ import Splash from "./pages/Splash"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import "./App.css"
+import PublicRoute from "./components/PublicRoute"
+import ProtectedRoute from "./components/ProtectedRoute"
+import Home from "./pages/Home"
 
 
 function App() {
@@ -15,8 +18,27 @@ function App() {
 
         <Route path="/splash" element={ <Splash /> }/>
 
-        <Route path="/login" element={ <Login /> }/>
-        <Route path="/register" element={ <Register /> }/>
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
+
+        <Route path="/register" element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        } />
+
+        <Route path="/home" element={
+
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+
+        } />
+
+
 
       </Routes>
     

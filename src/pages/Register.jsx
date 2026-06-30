@@ -10,7 +10,7 @@ import { emailAvailabilityRequest, usernameAvailabilityRequest } from "../contex
 import { useDynamicValidation, useEmailAddressValidation } from "../hooks/input/useDynamicValidation";
 import { normalizeEmail } from "../utils/normalize/normalizeEmail";
 import { isValidEmail } from "../utils/validation/emailValidation";
-import { registerRequest } from "../context/authRequest";
+import { registerRequest } from "../context/authRequests";
 import { validateInput } from "../utils/validation/generalValidation";
 
 

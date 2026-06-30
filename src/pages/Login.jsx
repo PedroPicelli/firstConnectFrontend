@@ -5,15 +5,21 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { classifyLoginType, LoginIdentifierType } from "../utils/classify/classifyLoginIdentifier"
 import BaseError from "../components/BaseError"
+import { loginRequest } from "../context/authRequests"
 
 
 function Login() {
 
     const navigate = useNavigate()
 
+    const [requestingLogin, setRequestingLogin] = useState(false)
+
     const [loginIdentifier, setLoginIdentifier] = useState("")
     const [password, setPassword] = useState("")
-    var loginIdentifierType = LoginIdentifierType.UNKNOWN
+    const [loginIdentifierType, setLoginIdentifierType] = useState(LoginIdentifierType.UNKNOWN)
+
+    const [errorText, setErrorText] = useState("")
+
 
 
     function handleLoginIdentifier(e) {
@@ -22,7 +28,7 @@ function Login() {
 
 
         setLoginIdentifier(identifierValue)
-        loginIdentifierType = classifyLoginType(identifierValue)
+        setLoginIdentifierType(classifyLoginType(identifierValue))
 
     }
 
@@ -32,6 +38,48 @@ function Login() {
 
         setPassword(passwordValue)
         
+    }
+
+    async function handleLogin(e) {
+
+        e.preventDefault()
+
+        if(loginIdentifierType == LoginIdentifierType.UNKNOWN) {
+            setErrorText("Invalid Credentials")
+        }
+
+        setRequestingLogin(true)
+        
+        try {
+            const data = await loginRequest(loginIdentifier, loginIdentifierType, password)
+
+            localStorage.setItem("token", data.token)
+            localStorage.setItem("user", JSON.stringify(data.user))
+
+            setErrorText("")
+
+            navigate("/home")
+
+        } catch(error) {
+
+            switch(error.message) {
+
+                case "Unauthorized":
+                case "Bad Request":
+                    setErrorText("Invalid Credentials")
+                    break;
+
+                default:
+                    setErrorText("Internal Server Error")
+                    break;
+
+            }
+
+        } finally {
+            setRequestingLogin(false)
+
+        }
+
     }
 
 
@@ -51,7 +99,7 @@ function Login() {
 
                     </div>
 
-                    <form action="" className="auth-forms">
+                    <form onSubmit={ handleLogin } className="auth-forms">
                         <div className="form-default-input">
                             <label htmlFor="email">Email or username:</label>
                             <input type="text" id="email" value={ loginIdentifier } onInput={ handleLoginIdentifier }/>
@@ -64,10 +112,10 @@ function Login() {
                         </div>
 
 
-                        <BaseError text="Invalid credentials" />
+                        <BaseError text={ errorText } />
 
 
-                        <button className="default-button main-button">Login</button>
+                        <button disabled={ requestingLogin } className="default-button main-button">Login</button>
 
 
                     </form>
