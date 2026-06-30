@@ -3,14 +3,14 @@ import { normalizeUsername } from "../utils/normalize/normalizeUsername";
 import { hasInvalidUsernameChars } from "../utils/validation/usernameValidation";
 import icon from "./../assets/icon.png"
 import FloatingCard from "../components/FloatingCard"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { useShakeAnimation } from "../hooks/input/useShakeAnimation";
 import { emailAvailabilityRequest, usernameAvailabilityRequest } from "../context/availabilityRequests";
 import { useDynamicValidation, useEmailAddressValidation } from "../hooks/input/useDynamicValidation";
 import { normalizeEmail } from "../utils/normalize/normalizeEmail";
 import { isValidEmail } from "../utils/validation/emailValidation";
-import { registerRequest } from "../context/registerRequest";
+import { registerRequest } from "../context/authRequest";
 import { validateInput } from "../utils/validation/generalValidation";
 
 
@@ -27,6 +27,8 @@ const validatingClasses = {
 function Register() {
 
     const navigate = useNavigate()
+
+    const [requestingRegister, setRequestingRegister] = useState(false)
 
     const [email, setEmail] = useState("")
     const [validEmail, setValidEmail] = useState(false)
@@ -74,13 +76,14 @@ function Register() {
             setValidateEmailClass("")
             triggerEmailValidation("")
             setValidEmail(false)
-            return
-        } else {
-            setValidEmail(true)
+            return false
         }
+
+        setValidEmail(true)
 
 
         triggerEmailValidation(emailNormalized)
+        return true
     }
 
     async function handleEmail(e) {
@@ -106,7 +109,7 @@ function Register() {
             setValidUsername(false)
         }
 
-        triggerUsernameValidation(userNormalized)
+        triggerUsernameValidation(userValue)
     }
 
     function handleUsername(e) {
@@ -165,11 +168,7 @@ function Register() {
 
     }
 
-
-    async function handleRegister(e) {
-
-        e.preventDefault();
-
+    function handleError(emailAvailable, usernameAvailable) {
         setEmailError("")
         setDisplayNameError("")
         setUsernameError("")
@@ -178,52 +177,76 @@ function Register() {
 
         if(!validEmail) {
             setEmailError("Please insert a valid email")
+            
         } else if(!emailAvailability) {
             setEmailError("This email is already taken")
         }
 
         if(!validEmail || !emailAvailability) {
             emailTriggerShake()
-            return
+            return false
         }
 
         if(!validDisplayName) {
             displayNameTriggerShake()
             setDisplayNameError("Display Name must have at least 3 characters")
-            return
+            return false
         }
 
 
         if(!validUsername) {
             setUsernameError("Username must have at least 5 characters")
+
         } else if(!usernameAvailability) {
             setUsernameError("This username is already taken")
         }
 
         if(!validUsername || !usernameAvailability) {
             usernameTriggerShake()
-            return
+            return false
         }
 
         if(!validPassword) {
             passwordTriggerShake()
             setPasswordError("Password must have at least 8 characters")
+            return false
+        }
+
+        return true
+    }
+
+
+    async function handleRegister(e) {
+
+        e.preventDefault();
+
+        if(!handleError()) {
             return
         }
 
+        setRequestingRegister(true)
+
         try {
-            const request = await registerRequest(email, displayName, username, password)
+            await registerRequest(email, displayName, username, password)
+
+            navigate("/login")
+
 
         } catch(error) {
-            switch(error) {
+            switch(error.message) {
                 case "Conflict":
-                    verifyEmail()
-                    verifyUsername()
+                    verifyEmail(email)
+                    verifyUsername(username)
                     break;
 
                 default:
+                    alert("Internal Server Error")
                     break;
             }
+        } finally {
+
+            setRequestingRegister(false)
+
         }
 
     }
@@ -313,7 +336,7 @@ function Register() {
                         </div>
 
 
-                        <button className="default-button main-button">Create account</button>
+                        <button disabled={ requestingRegister } className="default-button main-button">Create account</button>
 
 
                     </form>

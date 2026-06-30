@@ -21,6 +21,13 @@
   background: var(--button-primary);
 }
 
+.main-button:disabled {
+
+  background: var(--button-primary-disabled);
+  color: var(--button-primary-disabled-text);
+
+}
+
 .secondary-button {
   width: 100%;
   height: 50px;
@@ -28,4 +35,13 @@
   background: var(--button-secondary);
   border: 1px solid var(--button-secondary-border);
 }
+
+.secondary-button:disabled {
+
+  background: var(--button-secondary-disabled);
+  border: 1px solid var(--button-secondary-disabled-border);
+  color: var(--button-secondary-disabled-disabled-text);
+
+}
+
 

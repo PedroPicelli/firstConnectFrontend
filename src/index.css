@@ -84,6 +84,12 @@
   --button-secondary: transparent;
   --button-secondary-border: #FACC15;
 
+  --button-primary-disabled: #9CA3AF;
+  --button-primary-disabled-text: #F3F4F6;
+
+  --button-secondary-disabled: transparent;
+  --button-secondary-disabled-border: #D1D5DB;
+  --button-secondary-disabled-text: #D1D5DB;
   
 
   --scrollbar: #24324A;

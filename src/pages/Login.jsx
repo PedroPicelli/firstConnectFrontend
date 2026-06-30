@@ -4,6 +4,8 @@ import FloatingCard from "../components/FloatingCard"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { classifyLoginType, LoginIdentifierType } from "../utils/classify/classifyLoginIdentifier"
+import BaseError from "../components/BaseError"
+
 
 function Login() {
 
@@ -11,7 +13,7 @@ function Login() {
 
     const [loginIdentifier, setLoginIdentifier] = useState("")
     const [password, setPassword] = useState("")
-    const loginIdentifierType = LoginIdentifierType.UNKNOWN
+    var loginIdentifierType = LoginIdentifierType.UNKNOWN
 
 
     function handleLoginIdentifier(e) {
@@ -28,7 +30,7 @@ function Login() {
 
         const passwordValue = e.target.value
 
-        setPassword(password)
+        setPassword(passwordValue)
         
     }
 
@@ -60,6 +62,9 @@ function Login() {
                             <label htmlFor="password">Password:</label>
                             <input type="password" id="password" value={ password } onInput={ handlePassword }/>
                         </div>
+
+
+                        <BaseError text="Invalid credentials" />
 
 
                         <button className="default-button main-button">Login</button>

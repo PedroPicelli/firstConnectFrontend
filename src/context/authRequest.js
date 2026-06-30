@@ -19,6 +19,7 @@ export async function registerRequest(email, displayName, username, password) {
         })
     })
 
+
     if(request.status == 200) {
         return request.json()
     }

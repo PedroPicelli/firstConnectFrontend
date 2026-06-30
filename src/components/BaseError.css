@@ -1,0 +1,23 @@
+.base-error-wrapper {
+    margin-top: 25px;
+    transition: opacity .2s ease;
+}
+
+.base-error-wrapper[data-active="true"] {
+
+    opacity: 1;
+
+}
+
+.base-error-wrapper[data-active="false"] {
+
+    opacity: 0;
+
+}
+
+.base-error-text {
+    min-height: 30px;
+    color: var(--danger);
+    font-size: clamp(1rem, 4vw, 1.2rem);
+}
+
