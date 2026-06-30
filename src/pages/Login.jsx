@@ -58,7 +58,7 @@ function Login() {
 
             setErrorText("")
 
-            navigate("/home")
+            navigate("/")
 
         } catch(error) {
 

@@ -2,7 +2,11 @@
 
 
 :root {
-
+  --size-xs: 32px;
+  --size-sm: 40px;
+  --size-md: 48px;
+  --size-lg: 56px;
+  --size-xl: 64px;
   
 
   --background-main: #050816;
@@ -133,18 +137,18 @@ body::before {
     content: "";
 
     position: fixed;
-    inset: -20%;
+    inset: -100%;
 
     background:
         radial-gradient(
             circle at top left,
             rgba(37,99,235,0.2),
-            transparent 35%
+            transparent 55%
         ),
         radial-gradient(
             circle at bottom right,
             rgba(250,204,21,0.16),
-            transparent 30%
+            transparent 55%
         );
 
     pointer-events: none;

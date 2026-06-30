@@ -5,7 +5,10 @@ import Register from "./pages/Register"
 import "./App.css"
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
-import Home from "./pages/Home"
+import Feed from "./pages/Feed"
+import Explore from "./pages/Explore"
+import Team from "./pages/Team"
+import Profile from "./pages/Profle"
 
 
 function App() {
@@ -30,10 +33,37 @@ function App() {
           </PublicRoute>
         } />
 
-        <Route path="/home" element={
+
+
+
+        <Route path="/" element={
 
           <ProtectedRoute>
-            <Home />
+            <Feed />
+          </ProtectedRoute>
+
+        } />
+
+        <Route path="/explore" element={
+
+          <ProtectedRoute>
+            <Explore />
+          </ProtectedRoute>
+
+        } />
+
+        <Route path="/team" element={
+
+          <ProtectedRoute>
+            <Team />
+          </ProtectedRoute>
+
+        } />
+
+        <Route path="/profile" element={
+
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
 
         } />

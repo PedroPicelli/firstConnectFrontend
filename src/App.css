@@ -1,9 +1,8 @@
 .default-button {
   font-size: clamp(1.2rem, 5dvw, 1.5rem);
   cursor: pointer;
-  transition: background 0.08s ease-in-out;
   width: 100%;
-  height: 50px;
+  height: var(--size-lg);
 }
 
 .main-button {
@@ -11,6 +10,7 @@
   background: var(--button-primary);
   box-shadow: 0 8px 24px rgba(123, 47, 247, 0.25);
   border: 1px solid var(--button-primary);
+  transition: background 0.08s ease-in-out;
 }
 
 .main-button:hover {
@@ -30,10 +30,11 @@
 
 .secondary-button {
   width: 100%;
-  height: 50px;
+  height: var(--size-lg);
   border-radius: 9px;
   background: var(--button-secondary);
   border: 1px solid var(--button-secondary-border);
+  transition: background 0.08s ease-in-out;
 }
 
 .secondary-button:disabled {

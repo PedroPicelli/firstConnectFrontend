@@ -1,0 +1,40 @@
+.app-nav {
+
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    height: 82px;
+    width: 100dvw;
+
+}
+
+.app-nav > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    gap: 4px;
+    flex: 1;
+}
+
+.app-nav > button.default-nav-button {
+    height: 100%;
+    background: none;
+}
+
+.app-nav > button.emphasis-nav-button {
+  min-width: var(--size-xl);
+  min-height: var(--size-xl);
+  border-radius: 50%;
+  margin: 0 12px;
+  flex: 0;
+  align-self: flex-start;
+}
+
+.app-nav > button.nav-current-page * {
+    color: var(--primary-yellow);
+}
