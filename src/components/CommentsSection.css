@@ -69,6 +69,9 @@
 .comment-input-area {
 
     height: var(--size-lg);
+    box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,.05);
 
 }
 
@@ -97,7 +100,36 @@
     border-radius: 50%;
     width: var(--size-sm);
     height: var(--size-sm);
+    background: linear-gradient(
+        180deg,
+        var(--primary-blue-light),
+        var(--primary-blue)
+    );
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.35),
+        inset 0 1px 1px rgba(255,255,255,.15);
+
+    border: none;
 }
+
+
+.comment-forms .send-comment-button:hover {
+  background: var(--button-primary-hover);
+}
+
+.comment-forms .send-comment-button:active {
+  background: var(--button-primary);
+}
+
+.comment-forms .send-comment-button:disabled {
+
+  background: var(--button-primary-disabled);
+  color: var(--button-primary-disabled-text);
+
+}
+
+
 
 .comment-forms .send-comment-button path {
     color: var(--primary-yellow-dark);

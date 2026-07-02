@@ -39,7 +39,7 @@ function Feed() {
                     <div className="feed-posts">
                         {
                             postsList.map((post) => (
-                                <PostCard key={ post.id } post={ post } changeCurrentPost={ () => { setCurrentPost(post) } }/>
+                                <PostCard key={ post.id } post={ post } setCommentsActive={ () => { setCommentsActive(true) } } changeCurrentPost={ setCurrentPost }/>
                             ))
                         }
                     </div>

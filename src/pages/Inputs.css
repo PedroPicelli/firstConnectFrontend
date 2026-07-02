@@ -77,6 +77,10 @@
     resize: none;
 
 }
+.input-textarea::placeholder {
+    color: var(--text-muted);
+
+}
 .input-textarea:focus {
 
     border-color: var(--primary-blue-light);

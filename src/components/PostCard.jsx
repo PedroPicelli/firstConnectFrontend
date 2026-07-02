@@ -4,7 +4,7 @@ import { ChatIcon } from "./icons/ChatIcon"
 import { toggleLikeRequest } from "../context/posts/toggleLikeRequest"
 import { useState } from "react"
 
-function PostCard({ post, changeCurrentPost }) {
+function PostCard({ post, changeCurrentPost, setCommentsActive }) {
 
     const [isLiked, setIsLiked] = useState(post.isLikedByMe)
     const [likesCount, setLikesCount] = useState(post.likesCount)
@@ -82,7 +82,9 @@ function PostCard({ post, changeCurrentPost }) {
                         </p>
                     </button>
                     
-                    <button onClick={ changeCurrentPost }>
+                    <button onClick={ () => {
+                            changeCurrentPost(post); setCommentsActive(true)
+                        } }>
                         <ChatIcon />
                         <p>Comment</p>
                     </button>
