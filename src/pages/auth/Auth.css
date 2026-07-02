@@ -1,4 +1,5 @@
 
+
 .auth-page-section {
     display: flex;
     flex-direction: column;
@@ -48,7 +49,7 @@
 }
 
 .auth-page-section .auth-header h1 {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
 
 }
 
@@ -61,15 +62,6 @@
 }
 
 
-.form-default-input {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-
-
 .input-hint {
     opacity: 0;
     max-height: 0;
@@ -77,44 +69,6 @@
         max-height .3s ease-in-out;
 }
 
-.form-default-input label {
-
-    font-size: clamp(1.2rem, 4vw, 1.6rem);
-    color: var(--text-secondary);
-    font-weight: 500;
-
-}
-
-.form-default-input input {
-    
-    min-height: 48px;
-    width: 100%;
-    border-radius: var(--radius-sm);
-    outline: none;
-    padding-left: 12px;
-    font-size: clamp(1rem, 4vw, 1.2rem);
-
-    background: var(--background-input);
-    backdrop-filter: blur(12px);
-
-    border: 1px solid var(--border-default);
-
-    box-shadow: 0 0 12px rgba(37,99,235,0.08);
-
-    border: 1px solid transparent;
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-
-}
-
-.form-default-input input:focus {
-
-    border-color: var(--primary-blue-light);
-
-}
 
 .form-default-input:focus-within .input-hint {
 

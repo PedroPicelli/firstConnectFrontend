@@ -1,17 +1,18 @@
 import "./Auth.css"
-import { normalizeUsername } from "../utils/normalize/normalizeUsername";
-import { hasInvalidUsernameChars } from "../utils/validation/usernameValidation";
-import icon from "./../assets/icon.png"
-import FloatingCard from "../components/FloatingCard"
+import "../Inputs.css"
+import { normalizeUsername } from "../../utils/normalize/normalizeUsername";
+import { hasInvalidUsernameChars } from "../../utils/validation/usernameValidation";
+import icon from "../../assets/icon.png"
+import FloatingCard from "../../components/FloatingCard"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
-import { useShakeAnimation } from "../hooks/input/useShakeAnimation";
-import { emailAvailabilityRequest, usernameAvailabilityRequest } from "../context/availabilityRequests";
-import { useDynamicValidation, useEmailAddressValidation } from "../hooks/input/useDynamicValidation";
-import { normalizeEmail } from "../utils/normalize/normalizeEmail";
-import { isValidEmail } from "../utils/validation/emailValidation";
-import { registerRequest } from "../context/authRequests";
-import { validateInput } from "../utils/validation/generalValidation";
+import { useShakeAnimation } from "../../hooks/input/useShakeAnimation";
+import { emailAvailabilityRequest, usernameAvailabilityRequest } from "../../context/availabilityRequests";
+import { useDynamicValidation, useEmailAddressValidation } from "../../hooks/input/useDynamicValidation";
+import { normalizeEmail } from "../../utils/normalize/normalizeEmail";
+import { isValidEmail } from "../../utils/validation/emailValidation";
+import { registerRequest } from "../../context/authRequests";
+import { validateInput } from "../../utils/validation/generalValidation";
 
 
 const validatingClasses = {

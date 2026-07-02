@@ -1,0 +1,17 @@
+.create-post-form {
+
+    display: flex;
+    flex-direction: column;
+    padding: 32px 12px;
+
+}
+
+.create-post-form textarea {
+    min-height: 180px;
+}
+
+.create-post-form button {
+
+    margin-top: 12px;
+
+}

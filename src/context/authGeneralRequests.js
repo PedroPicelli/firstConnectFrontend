@@ -1,3 +1,9 @@
+function getToken() {
+
+  return localStorage.getItem("token")
+
+}
+
 export async function authFetch(url, options = {}) {
   const res = await fetch(url, {
     ...options,

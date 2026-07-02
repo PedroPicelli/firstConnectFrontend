@@ -1,12 +1,14 @@
 .app-nav {
 
     display: flex;
-    position: fixed;
     align-items: center;
     justify-content: center;
     bottom: 0;
-    height: 82px;
+    height: 94px;
     width: 100dvw;
+    padding-top: 8px;
+    border-top: 1px solid var(--glass-effect);
+    backdrop-filter: blur(8px);
 
 }
 

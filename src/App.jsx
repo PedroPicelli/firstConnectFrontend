@@ -1,14 +1,15 @@
 import { Routes, Route } from "react-router-dom"
-import Splash from "./pages/Splash"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
+import Splash from "./pages/auth/Splash"
+import Login from "./pages/auth/Login"
+import Register from "./pages/auth/Register"
 import "./App.css"
 import PublicRoute from "./components/PublicRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
-import Feed from "./pages/Feed"
-import Explore from "./pages/Explore"
-import Team from "./pages/Team"
-import Profile from "./pages/Profle"
+import Feed from "./pages/app/Feed"
+import Explore from "./pages/app/Explore"
+import Team from "./pages/app/Team"
+import Profile from "./pages/app/Profle"
+import AddPost from "./pages/app/AddPost"
 
 
 function App() {
@@ -64,6 +65,14 @@ function App() {
 
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+
+        } />
+
+        <Route path="/addPost" element={
+
+          <ProtectedRoute>
+            <AddPost />
           </ProtectedRoute>
 
         } />

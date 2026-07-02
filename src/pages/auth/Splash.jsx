@@ -1,4 +1,4 @@
-import icon from "./../assets/icon.png"
+import icon from "../../assets/icon.png"
 import { useNavigate } from "react-router-dom"
 import "./Splash.css"
 

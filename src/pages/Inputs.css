@@ -1,0 +1,84 @@
+
+
+.form-default-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+
+
+.form-default-input label {
+
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: var(--text-secondary);
+    font-weight: 500;
+
+}
+
+.form-default-input input {
+    
+    min-height: 48px;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    outline: none;
+    padding-left: 12px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+
+    background: var(--background-input);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid var(--border-default);
+
+    box-shadow: 0 0 12px rgba(37,99,235,0.08);
+
+    border: 1px solid transparent;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+}
+
+.form-default-input input:focus {
+
+    border-color: var(--primary-blue-light);
+
+}
+
+
+
+.input-textarea {
+    
+    min-height: 48px;
+    height: auto;
+    width: 100%;
+    border-radius: var(--radius-sm);
+    outline: none;
+    padding: 12px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+
+    background: var(--background-input);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid var(--border-default);
+
+    box-shadow: 0 0 12px rgba(37,99,235,0.08);
+
+    border: 1px solid transparent;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+    resize: none;
+
+}
+.input-textarea:focus {
+
+    border-color: var(--primary-blue-light);
+
+}

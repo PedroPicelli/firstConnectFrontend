@@ -1,11 +1,12 @@
 import "./Auth.css"
-import icon from "./../assets/icon.png"
-import FloatingCard from "../components/FloatingCard"
+import "../Inputs.css"
+import icon from "../../assets/icon.png"
+import FloatingCard from "../../components/FloatingCard"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { classifyLoginType, LoginIdentifierType } from "../utils/classify/classifyLoginIdentifier"
-import BaseError from "../components/BaseError"
-import { loginRequest } from "../context/authRequests"
+import { classifyLoginType, LoginIdentifierType } from "../../utils/classify/classifyLoginIdentifier"
+import BaseError from "../../components/BaseError"
+import { loginRequest } from "../../context/authRequests"
 
 
 function Login() {
