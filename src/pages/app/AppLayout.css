@@ -1,9 +1,17 @@
 
-
-.app-page {
+.app-page-wrapper {
     display: flex;
     flex-direction: column;
     height: 100dvh;
+}
+
+.app-main-fields {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    overflow: hidden;
+
 }
 
 .app-header {
@@ -19,3 +27,26 @@
 .app-nav {
     flex-shrink: 0;
 }
+
+
+@media screen and (min-width: 650px) {
+    
+    .app-page-wrapper {
+        flex-direction: row-reverse;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .app-page {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .app-page-wrapper {
+        width: 100dvw;
+        max-width: 1350px;
+    }
+
+}
+

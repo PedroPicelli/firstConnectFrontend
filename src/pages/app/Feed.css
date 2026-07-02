@@ -1,3 +1,7 @@
+.feed-wrapper {
+    display: block;
+}
+
 .feed-posts {
 
     display: flex;
@@ -5,3 +9,34 @@
     gap: 12px;
 
 }
+
+.feed-sidebar {
+    display: block;
+}
+
+@media screen and (min-width: 1024px) {
+    
+    .feed-wrapper {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 12px;
+    }
+
+    .feed-sidebar {
+        display: block;
+        position: sticky;
+        top: 0;
+        height: fit-content;
+        background-color: var(--background-card);
+        border: 1px solid var(--border-default);
+
+        padding: 24px;
+        box-shadow: 0 4px 20px var(--shadow-card);
+        width: 100%;
+        min-height: 100px;
+        border-radius: var(--radius-sm);
+
+    }
+
+}
+

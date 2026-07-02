@@ -9,12 +9,15 @@ function Team() {
         <>
         
             <section className="app-page">
-                <AppHeader title="Team" />
-            
-                <main className="app-main"></main>
+                <div className="app-page-wrapper">
+                    <div className="app-main-fields">
+                        <AppHeader title="Team" />
+                    
+                        <main className="app-main"></main>
+                    </div>
 
-                <AppNav currentPage="team" />
-
+                    <AppNav currentPage="team" />
+                </div>
             </section>
         
         </>

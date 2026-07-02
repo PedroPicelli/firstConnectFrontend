@@ -10,11 +10,16 @@ function Profile() {
         <>
         
             <section className="app-page">
-                <AppHeader title="Profile" />
+                
+                <div className="app-page-wrapper">
+                    <div className="app-main-fields">
+                        <AppHeader title="Profile" />
 
-                <main className="app-main"></main>
+                        <main className="app-main"></main>
+                    </div>
 
-                <AppNav currentPage="profile" />
+                    <AppNav currentPage="profile" />
+                </div>
 
             </section>
         

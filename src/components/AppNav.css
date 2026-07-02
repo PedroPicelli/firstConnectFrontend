@@ -40,3 +40,77 @@
 .app-nav > button.nav-current-page * {
     color: var(--primary-yellow);
 }
+
+
+
+@media screen and (min-width: 650px) {
+
+    .app-nav {
+
+        flex-direction: column;
+        height: 100dvh;
+        width: 94px;
+
+    }
+
+    .app-nav > button.emphasis-nav-button {
+        align-self: center;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+    .app-nav {
+
+        flex-direction: column;
+        justify-content: start;
+        height: 100dvh;
+        min-width: 180px;
+        width: fit-content;
+        padding-top: var(--size-xl);
+        padding-left: 32px;
+
+    }
+
+    .app-nav > button {
+        flex-direction: row;
+        justify-content: start;
+        gap: 8px;
+        font-size: 1.4rem;
+        flex-grow: 0;
+        min-height: var(--size-lg);
+        width: 100%;
+    }
+
+    
+    .app-nav > button.emphasis-nav-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        border: none;
+        cursor: pointer;
+        gap: 4px;
+        flex: 1;
+        min-height: var(--size-lg);
+        max-height: var(--size-lg);
+        width: 100%;
+        border-radius: 0;
+        background: none;
+        box-shadow: none;
+    }
+
+    .app-nav > button.emphasis-nav-button::after {
+        
+        content: "Post";
+
+    }
+
+    .app-nav > button {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+
+}

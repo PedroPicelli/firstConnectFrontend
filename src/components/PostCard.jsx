@@ -86,7 +86,12 @@ function PostCard({ post, changeCurrentPost, setCommentsActive }) {
                             changeCurrentPost(post); setCommentsActive(true)
                         } }>
                         <ChatIcon />
-                        <p>Comment</p>
+                        <p>{
+                                post.comments.length == 0
+                                    ? "Comment"
+                                    : post.comments.length
+                            
+                            }</p>
                     </button>
 
                 </footer>

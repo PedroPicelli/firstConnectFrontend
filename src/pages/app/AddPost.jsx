@@ -72,27 +72,31 @@ function AddPost() {
         <>
         
             <section className="app-page">
-                <AppHeader backFunction={ () => { if(!requestingPost) { navigate("/") } } } title="Create New Post" />
+                <div className="app-page-wrapper">
+                    <div className="app-main-fields">
+                        <AppHeader backFunction={ () => { if(!requestingPost) { navigate("/") } } } title="Create New Post" />
 
 
-                <main className="app-main">
+                        <main className="app-main">
 
-                    <form onSubmit={ handleCreatePost } className="create-post-form">
+                            <form onSubmit={ handleCreatePost } className="create-post-form">
 
-                        <div className="form-default-input">
-                            <label htmlFor="content">Content:</label>
-                            <div className={ "input-wrapper" }>
-                                <textarea maxLength={ 1000 } id="content" className="input-textarea" placeholder="Write something cool..." value={ contentText } onInput={ (e) => { setContentText(e.target.value) } }></textarea>
-                            </div>
+                                <div className="form-default-input">
+                                    <label htmlFor="content">Content:</label>
+                                    <div className={ "input-wrapper" }>
+                                        <textarea maxLength={ 1000 } id="content" className="input-textarea" placeholder="Write something cool..." value={ contentText } onInput={ (e) => { setContentText(e.target.value) } }></textarea>
+                                    </div>
 
-                            <BaseError text={ errorText }/>
-                        </div>
+                                    <BaseError text={ errorText }/>
+                                </div>
 
-                        <button disabled={ requestingPost } className="default-button main-button">Create Post</button>
+                                <button disabled={ requestingPost } className="default-button main-button">Create Post</button>
 
-                    </form>
+                            </form>
 
-                </main>
+                        </main>
+                    </div>
+                </div>
 
             </section>
         

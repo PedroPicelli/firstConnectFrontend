@@ -2,18 +2,73 @@ import "./CommentsSection.css"
 import CommentCard from "./CommentCard"
 import { CloseIcon } from "./icons/CloseIcon"
 import { SendIcon } from "./icons/SendIcon"
-import { act, useEffect } from "react"
+import { useEffect, useState } from "react"
+import { createCommentRequest } from "../context/posts/createCommentRequest"
 
 
 function CommentsSection( { post, active, setActive } ) {
+
+    const [commentsList, setCommentsList] = useState([])
+    const [commentContentText, setCommentContentText] = useState("")
+    const [requestingComment, setRequestingComment] = useState(false)
+
 
     useEffect(() => {
 
         if(post == null) {
             setActive(false)
+        } else {
+
+            setCommentsList(post.comments)
+            setRequestingComment(false)
+
         }
 
     }, [active])
+
+
+    async function handleSendComment(e) {
+
+        e.preventDefault()
+
+        if(post == null) {
+            return
+        }
+
+        if(commentContentText == 0 || commentContentText > 500) {
+            return
+        }
+
+        setRequestingComment(true)
+
+        try {
+            const data = await createCommentRequest(commentContentText, post.id)
+
+            setCommentsList([data, ...commentsList])
+            setCommentContentText("")
+
+        } catch(error) {
+
+            switch(error.message) {
+
+                case "Bad Request":
+                    break;
+
+                case "Not Found":
+                    break;
+
+                default:
+                    break;
+
+            }
+
+        } finally {
+
+            setRequestingComment(false)
+
+        }
+
+    }
 
 
     return (
@@ -25,32 +80,35 @@ function CommentsSection( { post, active, setActive } ) {
 
                     <header className="comments-header">
                         <div className="comments-header-spacer"/>
-                        <h1>10 comments</h1>
+                        <h1>{ commentsList.length } comments</h1>
                         <button onClick={ () => { setActive(false) } }>
                             <CloseIcon width={ 28 } height={ 28 } />
                         </button>
                     </header>
 
                     <section className="comments-wrapper">
-                        <CommentCard comment={ {
-                            author: "Pedro Picelli",
-                            content: "Comentario 1"
-                        } }/>
+                        {
 
-                        <CommentCard comment={ {
-                            author: "Pedro Picelli",
-                            content: "Testando modelo de comentario"
-                        } }/>
+                            commentsList.map(comment => {
+
+                                return <CommentCard key={ comment.id } comment={ {
+                                    author: comment.displayName,
+                                    content: comment.content
+                                } }/>
+
+                            })
+
+                        }
 
                     </section>
 
                     <section className="comment-input-area">
 
-                        <form onSubmit={ (e) => { e.preventDefault() } } className="comment-forms">
+                        <form onSubmit={ handleSendComment } className="comment-forms">
 
-                            <textarea className="input-textarea comment-input" placeholder="Add Comment" />
+                            <textarea className="input-textarea comment-input" placeholder="Add Comment" value={ commentContentText } onInput={ (e) => { setCommentContentText(e.target.value) } } />
 
-                            <button className="send-comment-button">
+                            <button disabled={ requestingComment } className="send-comment-button">
                                 <SendIcon />
                             </button>
 

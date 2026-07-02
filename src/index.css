@@ -106,10 +106,14 @@
   --radius-lg: 18px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
 
-
+/* Esconde no Firefox e IE/Legacy Edge */
 * {
-
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
