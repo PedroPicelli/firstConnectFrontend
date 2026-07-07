@@ -48,6 +48,11 @@
 
 }
 
+.form-default-input::placeholder {
+    color: var(--text-muted);
+
+}
+
 
 
 .input-textarea {

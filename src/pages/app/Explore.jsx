@@ -1,6 +1,7 @@
 
 import AppNav from "../../components/AppNav"
 import AppHeader from "../../components/AppHeader"
+import "./Text.css"
 
 function Explore() {
 

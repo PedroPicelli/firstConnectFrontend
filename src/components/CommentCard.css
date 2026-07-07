@@ -8,16 +8,30 @@
     padding: 8px 12px;
     border-radius: var(--radius-sm);
     box-shadow: 0 0 3px 1px var(--shadow-card);
+    gap: 16px;
 
 }
 
+.comment-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .comment-header .comment-author {
+
     font-size: 1.1rem;
     font-weight: 600;
 }
 
+.comment-header .comment-time {
+    font-size: 0.8rem;
+    color: var(--text-muted)
+
+}
+
 .comment-content {
-    padding: 4px 0;
+    padding: 8px 0;
 }
 
 .comment-content .comment-content-text {

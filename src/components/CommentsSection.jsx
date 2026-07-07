@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { createCommentRequest } from "../context/posts/createCommentRequest"
 
 
-function CommentsSection( { post, active, setActive } ) {
+function CommentsSection( { post, active, setActive, postsList=[], setPostsList } ) {
 
     const [commentsList, setCommentsList] = useState([])
     const [commentContentText, setCommentContentText] = useState("")
@@ -44,8 +44,28 @@ function CommentsSection( { post, active, setActive } ) {
         try {
             const data = await createCommentRequest(commentContentText, post.id)
 
-            setCommentsList([data, ...commentsList])
+            setCommentsList(prev => [data, ...prev]);
             setCommentContentText("")
+            const newPosts = postsList.map(p => {
+                if (p.id !== post.id) {
+                    return p;
+                }
+
+                return {
+                    ...p,
+                    comments: [data, ...p.comments]
+                };
+            });
+
+            setPostsList(prev =>
+                prev.map(p =>
+                    p.id === post.id
+                        ? { ...p, comments: [data, ...p.comments] }
+                        : p
+                )
+            );
+            
+
 
         } catch(error) {
 
@@ -91,10 +111,7 @@ function CommentsSection( { post, active, setActive } ) {
 
                             commentsList.map(comment => {
 
-                                return <CommentCard key={ comment.id } comment={ {
-                                    author: comment.displayName,
-                                    content: comment.content
-                                } }/>
+                                return <CommentCard key={ comment.id } comment={ comment }/>
 
                             })
 

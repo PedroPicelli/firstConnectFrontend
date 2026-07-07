@@ -110,7 +110,6 @@
   display: none;
 }
 
-/* Esconde no Firefox e IE/Legacy Edge */
 * {
   scrollbar-width: none;
   -ms-overflow-style: none;

@@ -1,3 +1,4 @@
+import { getRelativeTime } from "../utils/time/relativeTime"
 import "./CommentCard.css"
 
 function CommentCard( { comment } ) {
@@ -10,7 +11,8 @@ function CommentCard( { comment } ) {
 
                 <header className="comment-header">
 
-                    <h2 className="comment-author">{ comment.author }</h2>
+                    <h2 className="comment-author text-overflow-styled">{ comment.displayName }</h2>
+                    <p className="comment-time text-overflow-styled">• { getRelativeTime(comment.createdAt) }</p>
 
                 </header>
 

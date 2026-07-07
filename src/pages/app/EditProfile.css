@@ -1,0 +1,22 @@
+.edit-profile-form {
+
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+
+}
+
+.edit-profile-picture-wrapper {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+    margin-bottom: 12px;
+
+}
+
+.edit-profile-picture-wrapper input {
+    height: 100%;
+    border-radius: 50%;
+}

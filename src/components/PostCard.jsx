@@ -3,6 +3,7 @@ import { LikeIcon } from "./icons/LikeIcon"
 import { ChatIcon } from "./icons/ChatIcon"
 import { toggleLikeRequest } from "../context/posts/toggleLikeRequest"
 import { useState } from "react"
+import { getRelativeTime } from "../utils/time/relativeTime"
 
 function PostCard({ post, changeCurrentPost, setCommentsActive }) {
 
@@ -10,6 +11,8 @@ function PostCard({ post, changeCurrentPost, setCommentsActive }) {
     const [likesCount, setLikesCount] = useState(post.likesCount)
 
     const [requestingLike, setRequestingLike] = useState(false)
+
+
 
     async function handleLike(e) {
 
@@ -55,8 +58,11 @@ function PostCard({ post, changeCurrentPost, setCommentsActive }) {
 
                 <header className="post-header">
                     <div className="post-user">
-                        <h2 className="post-author">{ post.displayName }</h2>
-                        <p className="post-username">@{ post.username }</p>
+                        <h2 className="post-author text-overflow-styled">{ post.displayName }</h2>
+                        <p className="post-username text-overflow-styled">@{ post.username }</p>
+                    </div>
+                    <div className="post-time-wrapper">
+                        <p className="post-time text-overflow-styled">• { getRelativeTime(post.createdAt) }</p>
                     </div>
 
                 </header>

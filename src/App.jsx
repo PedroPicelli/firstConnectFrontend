@@ -8,8 +8,9 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import Feed from "./pages/app/Feed"
 import Explore from "./pages/app/Explore"
 import Team from "./pages/app/Team"
-import Profile from "./pages/app/Profle"
+import Profile from "./pages/app/Profile"
 import AddPost from "./pages/app/AddPost"
+import EditProfile from "./pages/app/EditProfile"
 
 
 function App() {
@@ -73,6 +74,14 @@ function App() {
 
           <ProtectedRoute>
             <AddPost />
+          </ProtectedRoute>
+
+        } />
+
+        <Route path="/editProfile" element={
+
+          <ProtectedRoute>
+            <EditProfile />
           </ProtectedRoute>
 
         } />

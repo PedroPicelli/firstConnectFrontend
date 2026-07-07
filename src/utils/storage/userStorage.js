@@ -1,13 +1,19 @@
+import { fullCleanStorage } from "./cleanStorage"
 
 export function getUserJson() {
 
-    var stringUser = localStorage.getItem("user")
+    try {
+        var stringUser = localStorage.getItem("user")
 
-    if(stringUser == null) {
+        if(stringUser == null) {
+            return null
+        }
+
+
+        return JSON.parse(stringUser)
+    } catch(error) {
+        fullCleanStorage()
         return null
     }
-
-
-    return JSON.parse(stringUser)
 
 }

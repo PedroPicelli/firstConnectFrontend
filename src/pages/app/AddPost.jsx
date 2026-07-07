@@ -1,6 +1,7 @@
 import "./AddPost.css"
 import "./AppLayout.css"
 import "../Inputs.css"
+import "./Text.css"
 import { useNavigate } from "react-router-dom"
 import AppHeader from "../../components/AppHeader"
 import { useState } from "react"

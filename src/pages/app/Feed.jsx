@@ -1,5 +1,6 @@
 import "./AppLayout.css"
 import "./Feed.css"
+import "./Text.css"
 import AppNav from "../../components/AppNav"
 import AppHeader from "../../components/AppHeader"
 import PostCard from "../../components/PostCard"
@@ -79,7 +80,7 @@ function Feed() {
                             <div className="feed-sidebar">
                                 <WelcomeSidebar displayName={ getUserJson().displayName }/>
 
-                                <CommentsSection post={ currentPost } active={ commentsActive } setActive={ setCommentsActive } />
+                                <CommentsSection post={ currentPost } active={ commentsActive } setActive={ setCommentsActive } postsList={ postsList } setPostsList={ setPostsList } />
                             </div>
                         </main>
                     </div>
