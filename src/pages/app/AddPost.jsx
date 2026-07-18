@@ -7,6 +7,7 @@ import AppHeader from "../../components/AppHeader"
 import { useState } from "react"
 import { createPostRequest } from "../../context/posts/createPostRequest"
 import BaseError from "../../components/BaseError"
+import { changeUserInfo, getUserJson } from "../../utils/storage/userStorage"
 
 function AddPost() {
 

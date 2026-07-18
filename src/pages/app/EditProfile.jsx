@@ -3,16 +3,17 @@ import "./EditProfile.css"
 import AppHeader from "../../components/AppHeader"
 import blankProfile from "../../assets/images/blankProfile.png";
 import BaseError from "../../components/BaseError";
-import { useState } from "react";
-import { editPostRequest } from "../../context/profile/editProfileRequest";
+import { useEffect, useState } from "react";
+import { editProfileRequest } from "../../context/profile/editProfileRequest";
 import { fullLoadStorage } from "../../utils/storage/loadStorage";
+import { getUserJson } from "../../utils/storage/userStorage";
 
 function EditProfile() {
 
     const navigate = useNavigate()
 
-    const [displayName, setDisplayName] = useState("")
-    const [bio, setBio] = useState("")
+    const [displayName, setDisplayName] = useState(getUserJson().displayName)
+    const [bio, setBio] = useState(getUserJson().bio)
 
     const [errorText, setErrorText] = useState("")
 
@@ -64,7 +65,7 @@ function EditProfile() {
 
         try {
 
-            const data = await editPostRequest(displayName, bio)
+            const data = await editProfileRequest(displayName, bio)
 
             fullLoadStorage(data.token, data.user)
 

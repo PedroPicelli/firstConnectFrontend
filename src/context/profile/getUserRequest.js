@@ -6,22 +6,15 @@ const API = import.meta.env.VITE_API_URL;
 
 
 
-export async function editProfileRequest(displayName, bio) {
+export async function getUserResquest() {
 
     const request = await authFetch(`${API}/user/me`, {
 
-        method: "PUT",
+        method: "GET",
 
         headers: {
             "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-            displayName: displayName,
-            bio: bio
-
-        })
+        }
 
     });
 
@@ -31,10 +24,6 @@ export async function editProfileRequest(displayName, bio) {
 
         return request.json()
 
-    }
-
-    if(request.status == 400) {
-        throw new Error("Bad Request")
     }
 
     if(request.status == 404) {
